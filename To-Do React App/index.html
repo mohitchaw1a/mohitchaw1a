@@ -1,11 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do Application</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do Application</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script defer type="text/babel">
+
+          class ToDo extends React.Component {
+              constructor(props) {
+                  super(props);
+              }
+
+          render() {
+              return (
+                  <li style={{ textDecoration: this.props.complete ? 'line-through' : 'none' }} >
+                      {this.props.text}
+                  </li>
+                  );
+          }
+          }
+
+          class ToDoList extends React.Component {
+              constructor(props) {
+                  super(props);
+                  this.state = {
+                      todos: [
+                          { text: 'HTML', complete: true },
+                          { text: 'CSS', complete: true },
+                          { text: 'JS', complete: true },
+                          { text: 'React', complete: false },
+                          { text: 'Node', complete: false},
+                          ],
+                  };
+              }
+              render() {
+                  return (
+                      <ul>
+                      {this.state.todos.map((todo, index) => (
+                          <ToDo key = {index} text = {todo.text} complete = {todo.complete} />
+                          ))}
+                      </ul>
+                  }
+              }
+
+          class parent extends React.Component {
+              constructor(props) {
+                  super(props);
+              }
+
+              render() {
+                  return (
+                      <div>
+                          <h1>To-Do List Application made using React </h1>
+                          <ToDoList />
+                      </div>
+                  );
+              }
+          }
+      ReactDOM.render(<Parent />, document.getElementById("root"));
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
